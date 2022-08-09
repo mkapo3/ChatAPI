@@ -4,13 +4,15 @@
     {
         public int Id { get; set; }
 
-        public string? Body { get; set; }
+        public string Body { get; set; } = string.Empty;
 
-        public int? SenderId { get; set; }
-
+        public string? UserName { get; set; }
         public DateTime? CreatedDate { get; set; }
 
         public int? ChatId { get; set; }
+
+        public bool? IsDeleted { get; set; }
+
 
     }
 }

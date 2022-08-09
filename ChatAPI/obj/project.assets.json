@@ -2065,11 +2065,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Users\\muhar\\Source\\Repos\\ChatAPI\\ChatAPI\\ChatAPI.csproj",
+      "projectUniqueName": "D:\\Users\\muhar\\Source\\Repos\\ChatApplication\\ChatAPI\\ChatAPI.csproj",
       "projectName": "ChatAPI",
-      "projectPath": "D:\\Users\\muhar\\Source\\Repos\\ChatAPI\\ChatAPI\\ChatAPI.csproj",
+      "projectPath": "D:\\Users\\muhar\\Source\\Repos\\ChatApplication\\ChatAPI\\ChatAPI.csproj",
       "packagesPath": "C:\\Users\\muhar\\.nuget\\packages\\",
-      "outputPath": "D:\\Users\\muhar\\Source\\Repos\\ChatAPI\\ChatAPI\\obj\\",
+      "outputPath": "D:\\Users\\muhar\\Source\\Repos\\ChatApplication\\ChatAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\muhar\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ChatAPI.Migrations
 {
-    public partial class InitalMigration : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,10 +15,11 @@ namespace ChatAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Body = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SenderId = table.Column<int>(type: "int", nullable: true),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ChatId = table.Column<int>(type: "int", nullable: true)
+                    ChatId = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,18 +28,18 @@ namespace ChatAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Messages",
-                columns: new[] { "Id", "Body", "ChatId", "CreatedDate", "SenderId" },
-                values: new object[] { 1, "Prva poruka", null, null, null });
+                columns: new[] { "Id", "Body", "ChatId", "CreatedDate", "IsDeleted", "UserName" },
+                values: new object[] { 1, "Prva poruka", null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "Messages",
-                columns: new[] { "Id", "Body", "ChatId", "CreatedDate", "SenderId" },
-                values: new object[] { 2, "Druga poruka", null, null, null });
+                columns: new[] { "Id", "Body", "ChatId", "CreatedDate", "IsDeleted", "UserName" },
+                values: new object[] { 2, "Druga poruka", null, null, null, null });
 
             migrationBuilder.InsertData(
                 table: "Messages",
-                columns: new[] { "Id", "Body", "ChatId", "CreatedDate", "SenderId" },
-                values: new object[] { 3, "Treca poruka", null, null, null });
+                columns: new[] { "Id", "Body", "ChatId", "CreatedDate", "IsDeleted", "UserName" },
+                values: new object[] { 3, "Treca poruka", null, null, null, null });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

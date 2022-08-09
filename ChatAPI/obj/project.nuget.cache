@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "itElzmxR/GK01RhnPpRKzY6ZrDQmdtuJWjw5q4XFTyCDczlaT2myCKIoI6XLFsBHHbaZS5pYFw+FkmkxPdRjDQ==",
+  "dgSpecHash": "LSGMJgiWeQMH6xmPy9iH8/9847YjF6HDA0yswkMlaGfcyXr/aaGfU8OHUfehnny2hn79vyjw0+z5MtCeSZ5BzQ==",
   "success": true,
-  "projectFilePath": "D:\\Users\\muhar\\Source\\Repos\\ChatAPI\\ChatAPI\\ChatAPI.csproj",
+  "projectFilePath": "D:\\Users\\muhar\\Source\\Repos\\ChatApplication\\ChatAPI\\ChatAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muhar\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\muhar\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
