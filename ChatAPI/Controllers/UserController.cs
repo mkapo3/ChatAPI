@@ -17,7 +17,7 @@ namespace ChatAPI.Controllers
             _context = context;
         }
 
-        [HttpPost("loginuser")]
+        [HttpGet("loginuser")]
         public ActionResult<User> LoginUser()
         {
             var user = new User();

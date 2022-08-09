@@ -6,7 +6,7 @@
 
         public string Body { get; set; } = string.Empty;
 
-        public string? UserName { get; set; }
+        public string? Username { get; set; }
         public DateTime? CreatedDate { get; set; }
 
         public int? ChatId { get; set; }

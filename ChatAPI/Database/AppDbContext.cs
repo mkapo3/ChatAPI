@@ -17,13 +17,16 @@ namespace ChatAPI.Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Message>().HasData(
-                    new Message { Id = 1, Body = "Prva poruka" }
+                    new Message { Id = 1, Body = "Prva poruka", Username="PrviKorisnik", ChatId=1, IsDeleted=false }
                 );
             modelBuilder.Entity<Message>().HasData(
-                    new Message { Id = 2, Body = "Druga poruka" }
+                    new Message { Id = 2, Body = "Druga poruka", Username = "DrugiKorisnik", ChatId = 1, IsDeleted = false }
                 );
             modelBuilder.Entity<Message>().HasData(
-                    new Message { Id = 3, Body = "Treca poruka" }
+                    new Message { Id = 3, Body = "Treca poruka", Username = "TreciKorisnik", ChatId = 1, IsDeleted = false }
+                );
+            modelBuilder.Entity<Message>().HasData(
+                    new Message { Id = 4, Body = "Cetvrta poruka", Username = "Muharem", ChatId = 1, IsDeleted = false }
                 );
 
         }
