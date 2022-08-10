@@ -1,4 +1,5 @@
 using ChatAPI.Database;
+using Lib.AspNetCore.ServerSentEvents;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddServerSentEvents();
+//builder.Services.AddHostedService<ServerEventsWorker>();
 
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetService<IConfiguration>();
@@ -35,6 +38,8 @@ builder.Services.AddCors(options =>
 
     });
 });
+
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
@@ -54,5 +59,6 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapControllers();
+
 
 app.Run();

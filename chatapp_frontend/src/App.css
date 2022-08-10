@@ -76,6 +76,8 @@
   background-color: #eed3c9;
   width: 25rem;
   height: 50rem;
+  max-height: 50rem;
+  
   border-radius: 15px;
   border: none;
 }
@@ -93,13 +95,9 @@
   flex-direction: column;
   padding: 2px;
   margin: 10px;
-  
+  overflow-y: auto;
 }
 
-.message{
-  
-  
-}
 
 .message-user{
   

@@ -3,7 +3,7 @@ import SendMessage from "./SendMessage"
 import Header from "./Header"
 import { useEffect } from "react"
 
-const Chat = ({username, messages, setMessages, chatName}) => {
+const Chat = ({currentUser, messages, setMessages, chatName}) => {
 
     const addMessage = (newMessage) => {
         setMessages([...messages,newMessage]);
@@ -17,12 +17,12 @@ const Chat = ({username, messages, setMessages, chatName}) => {
                 <Header chatName={chatName}/>
             </div>
             <div className="chat-messages">
-            {messages.map(message =>(
-                <Message key={message.id} message={message}/>
+            {messages && messages.map(message =>(
+                <Message key={message.id} message={message} currentUser={currentUser}/>
             ))}
             </div>
             <div className="chat-input">
-                <SendMessage addMessage={addMessage} username={username}/>
+                <SendMessage addMessage={addMessage} currentUser={currentUser}/>
             </div>
         </div>
     )

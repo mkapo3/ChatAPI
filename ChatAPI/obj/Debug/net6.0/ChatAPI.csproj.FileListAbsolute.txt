@@ -120,3 +120,4 @@ D:\Users\muhar\Source\Repos\ChatApplication\ChatAPI\obj\Debug\net6.0\scopedcss\b
 D:\Users\muhar\Source\Repos\ChatApplication\ChatAPI\obj\Debug\net6.0\ChatAPI.csproj.CopyComplete
 D:\Users\muhar\Source\Repos\ChatApplication\ChatAPI\obj\Debug\net6.0\ChatAPI.genruntimeconfig.cache
 D:\Users\muhar\Source\Repos\ChatApplication\ChatAPI\obj\Debug\net6.0\ref\ChatAPI.dll
+D:\Users\muhar\Source\Repos\ChatApplication\ChatAPI\bin\Debug\net6.0\Lib.AspNetCore.ServerSentEvents.dll

@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using ChatAPI.Database;
+using System.Text.Json;
+using System.Text;
 
 namespace ChatAPI.Controllers
 {
@@ -16,10 +18,21 @@ namespace ChatAPI.Controllers
             _context = context;
         }
         
-        [HttpGet("getmessages")]
-        public async Task<ActionResult<List<Message>>> GetMessages()
+        [HttpGet("messages")]
+        public async Task GetMessages()
         {
-            return await _context.Messages.ToListAsync();
+            List<Message> chatMessages = await _context.Messages.ToListAsync();
+
+            Response.Headers.Add("Content-Type", "text/event-stream");
+
+            string message = $"data: {JsonSerializer.Serialize(chatMessages)}\n\n";
+
+
+            byte[] messageBytes = ASCIIEncoding.ASCII.GetBytes(message);
+            await Response.Body.WriteAsync(messageBytes, 0, messageBytes.Length);
+            await Response.Body.FlushAsync();
+
+       
         }
 
         [HttpPost("sendmessage")]
@@ -30,7 +43,7 @@ namespace ChatAPI.Controllers
             return message.Body;
         }
 
-        [HttpGet("getmessages/{page}")]
+        [HttpGet("messages/{page}")]
         public async Task<ActionResult<MessageResponse>> GetMessagesPagination(int page)
         {
             

@@ -1,18 +1,32 @@
 import "react-chat-elements/dist/main.css";
 import { useState } from "react";
+import { urlMessage } from "../endpoints";
 
-const SendMessage = ({addMessage, username}) => {
+const SendMessage = ({addMessage, currentUser}) => {
 
     const [message, setMessage] = useState({
-        username: "username",
+        username: "",
         body:"", 
         currentUser: true});
 
+    const sendMessagePOST = async (username, body) => {
+        const responseUser =  await fetch(urlMessage + '/sendmessage', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                body: body,
+                chatId: 1,
+                createdData: null,
+                isDeleted: false,
+                username: username
+            })
+        })
+    }   
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        setMessage({body:"", currentUser: true});
-        console.log(message);
-        addMessage(message);
+        sendMessagePOST(message.username, message.body);
+        setMessage({body:""})
     }
 
     return(
@@ -20,7 +34,7 @@ const SendMessage = ({addMessage, username}) => {
             <form className="sendmessage-form" onSubmit={handleSubmit}>
                 <textarea
                     placeholder="Type here"
-                    onChange={(e) => setMessage({username: username, body:e.target.value, currentUser: true})}
+                    onChange={(e) => setMessage({username: currentUser, body:e.target.value})}
                     value={message.body}
                     className="sendmessage-input"
                 >
