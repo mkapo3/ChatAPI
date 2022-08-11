@@ -1,4 +1,3 @@
-import "react-chat-elements/dist/main.css";
 import { useState } from "react";
 import { urlMessage } from "../endpoints";
 

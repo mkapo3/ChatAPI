@@ -3,7 +3,6 @@ import Chat from "./components/Chat"
 import ActiveUsers from "./components/ActiveUsers"
 import { useEffect, useMemo, useState } from 'react';
 import { urlMessage, urlUser } from './endpoints';
-import ReactJsAlert from "reactjs-alert"
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
