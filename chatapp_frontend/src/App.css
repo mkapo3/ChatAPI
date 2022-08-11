@@ -1,10 +1,14 @@
 .App {
   display: flex;
-  justify-content: space-around;
   text-align: center;
-  padding-top: 30px;
+  
+  padding-left: 5px;
+  padding-right: 5px;
   background-color: #f0e8e5;
-  height: 100%;
+  height: 100vh;
+  margin: 0;
+  
+
 }
 
 .App-logo {
@@ -42,23 +46,40 @@
   }
 }
 
+
+
 .activeusers-div{
   display: flex;
   flex-direction: column;
+  height: 100%;
+  padding: 0;
   background-color: #eed3c9;
-  height: fit-content;
-  border-radius: 20px;
-  padding-bottom: 20px;
+  border-right: 4px solid black;
+  border-radius: 10px 0px 0px 10px;
+  width: 20%;
+  max-width: 300px;
 }
-.activeusers-div h2{
+.activeusers-div h3{
   margin: 0 auto;
   padding: 15px;
   background-color: rgba(153, 19, 19, 0.699);
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 10px 0px 0px 0px;
   margin-bottom: 12px;
+  width: 85%;
+  text-align: left;
+  font-size: 1rem;
+  
 }
 
+.activeusers-small-div{
+  display: none;
+  
+}
+
+
+
 .activeuser{
+  
   padding: 4px;
   padding-left: 10px;
   text-align: left;
@@ -74,20 +95,45 @@
   display: flex;
   flex-direction: column;
   background-color: #eed3c9;
-  width: 25rem;
-  height: 50rem;
-  max-height: 50rem;
-  
-  border-radius: 15px;
+  width: 100%;
+  height: 100%;
   border: none;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.chat-header{
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(153, 19, 19, 0.699);
+  position: relative;
+}
+
+.back-arrow{
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.not-shown{
+  display: none;
+}
+
+.fabars{
+  display: none;
+  
 }
 
 .header{
-  background-color: rgba(153, 19, 19, 0.699);
-  border-radius: 15px 15px 0px 0px;
+  text-align: center;
+  width: 100%;
   padding: 10px;
   font-size: larger;
   color: bisque;
+  border-radius: 0px 10px 0px 0px;
+
 }
 
 .chat-messages {
@@ -96,6 +142,7 @@
   padding: 2px;
   margin: 10px;
   overflow-y: auto;
+
 }
 
 
@@ -109,20 +156,10 @@
   font-size: 15px;
   max-width: 50%;
   word-wrap: break-word;
+  font-size: 0.9rem;
+
 }
 
-/* .current-user-message-user{
-  
-  width: fit-content;
-  margin-top: 0.5rem;
-  padding: 7px;
-  border-radius: 20px;
-  color: black;
-  font-size: 15px;
-  max-width: 50%;
-  word-wrap: break-word;
-  margin-left: auto;
-} */
 
 .message-body {
   background-color: rgb(136, 49, 49);
@@ -134,6 +171,8 @@
   font-size: 15px;
   max-width: 50%;
   word-wrap: break-word;
+  font-size: 1rem;
+
 }
 
 .current-user-message{
@@ -169,10 +208,11 @@
 .sendmessage-input {
   border-radius: 5px;
   padding: 5px;
-  width: 60%;
+  width: 100%;
   font-size: 16px;
   background-color: bisque;
   word-wrap: break-word;
+  margin-right: 10px;
 }
 
 .sendmessage-btn{
@@ -188,4 +228,38 @@
   background-color: rgb(168, 104, 78);;
   border-color: rgb(168, 104, 78);
   
+}
+
+@media (max-width: 500px) {
+  .activeusers-div{
+    display: none;
+  }
+  .fabars{
+    display: block;
+    position: absolute;
+    top: 13px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    
+  }
+  .activeusers-small-div{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: white;
+    background-color: #0a0a0a;
+    border-right: 4px solid black;
+    margin: 10px;
+    width: 95%;
+    
+  }
+  .activeusers-small-div h3{
+    margin-bottom: 10px;
+    
+  }
+
+  .activeuser{
+    text-align: center;
+  }
 }

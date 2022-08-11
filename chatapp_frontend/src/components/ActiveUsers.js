@@ -1,18 +1,24 @@
 import { useState } from "react";
 import ActiveUser from "./ActiveUser"
 
-const ActiveUsers = ({activeUsers, currentUser}) =>{
+const ActiveUsers = ({setChatId, setChatTitle, className, activeUsers, currentUser}) =>{
     
     const [activeUser, setActiveUser] = useState();
     
     
-
+//activeusers-div
     return(
-        <div className="activeusers-div">
-            <h2>Active Users</h2>
+        <div className={className}>
+            <h3>Active Users</h3>
             
             {activeUsers && activeUsers.map(activeUser =>(
-                <ActiveUser key={activeUser.id} activeUser={activeUser} currentUser={currentUser}/>
+                <ActiveUser
+                    setChatId = {setChatId} 
+                    setChatTitle = {setChatTitle}
+                    key={activeUser.id} 
+                    activeUser={activeUser} 
+                    currentUser={currentUser}
+                />
             ))}
         </div>
     )

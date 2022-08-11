@@ -2,7 +2,7 @@ import "react-chat-elements/dist/main.css";
 import { useState } from "react";
 import { urlMessage } from "../endpoints";
 
-const SendMessage = ({addMessage, currentUser}) => {
+const SendMessage = ({chatId, addMessage, currentUser}) => {
 
     const [message, setMessage] = useState({
         username: "",
@@ -10,17 +10,32 @@ const SendMessage = ({addMessage, currentUser}) => {
         currentUser: true});
 
     const sendMessagePOST = async (username, body) => {
-        const responseUser =  await fetch(urlMessage + '/sendmessage', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                body: body,
-                chatId: 1,
-                createdData: null,
-                isDeleted: false,
-                username: username
+        if(chatId == 0){
+            const responseUser =  await fetch(urlMessage + '/sendmessage', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    body: body,
+                    chatId: chatId,
+                    createdData: null,
+                    isDeleted: false,
+                    username: username
+                })
             })
-        })
+        }
+        else{
+            await fetch(urlMessage + '/sendprivatemessage/' + chatId, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    body: body,
+                    chatId: chatId,
+                    createdData: null,
+                    isDeleted: false,
+                    username: username
+                }) 
+            })
+        }
     }   
 
     const handleSubmit = (event) => {

@@ -29,16 +29,16 @@ namespace ChatAPI.Controllers
             Random random = new Random();
 
             int stringLength = random.Next(5, 10);
-            if (previousUser.Username == "")
+            if (previousUser.username == "")
             {
                 for (int i = 0; i < stringLength; i++)
                 {
-                    user.Username += Convert.ToChar(random.Next(0, 26) + 65);
+                    user.username += Convert.ToChar(random.Next(0, 26) + 65);
                 }
             }
             else
             {
-                user.Username = previousUser.Username;
+                user.username = previousUser.username;
             }
             //user.Username = "Muharem";
             //HttpContext.Session.SetString("username", user.Username);
@@ -86,7 +86,7 @@ namespace ChatAPI.Controllers
             if (!_memoryCache.TryGetValue(activeUsersKey, out activeUsers))
             {
                 User newUser = new User();
-                newUser.Username = "Nema nista u cache";
+                newUser.username = "Nema nista u cache";
                 //return new List<User> { newUser };
 
             }
@@ -111,7 +111,7 @@ namespace ChatAPI.Controllers
             string activeUsersKey = "activeusers";
             _memoryCache.TryGetValue(activeUsersKey, out activeUsers);
             try { 
-                var userToRemove = activeUsers.Single(user => user.Username == username);
+                var userToRemove = activeUsers.Single(user => user.username == username);
                 activeUsers.Remove(userToRemove);
             }
             catch (Exception e)
@@ -121,6 +121,66 @@ namespace ChatAPI.Controllers
 
         }
 
+        [HttpPost("startchat")]
+        public Chat StartChat(Chat chat)
+        {
+            string activeChatSessionsKey = "activechats";
+            List<Chat> activeChatSessions;
+            if (!_memoryCache.TryGetValue(activeChatSessionsKey, out activeChatSessions))
+            {
+                chat.chatId = 1;
+                activeChatSessions = new List<Chat> { chat };
+                _memoryCache.Set(activeChatSessionsKey, activeChatSessions);
+            }
+            else
+            {
+                Chat potentialNewChat = activeChatSessions.Find((newChat) =>
+                    newChat.senderUser.username == chat.senderUser.username
+                    && newChat.recipientUser.username == chat.recipientUser.username
+                    || newChat.senderUser.username == chat.recipientUser.username
+                    && newChat.recipientUser.username == chat.senderUser.username
+                    );
+                if (potentialNewChat  == null)
+                {
+                    chat.chatId = activeChatSessions.Last().chatId + 1;
+                    activeChatSessions.Add(chat);
+                    _memoryCache.Set(activeChatSessionsKey, activeChatSessions);
+                }
+                else
+                {
+                    chat.chatId = potentialNewChat.chatId;
+                }
+            }
+            return chat;
+        }
+
+        [HttpGet("getchats/{username}")]
+        public async Task GetChats(string username)
+        {
+            Response.Headers.Add("Content-Type", "text/event-stream");
+
+            string activeChatSessionsKey = "activechats";
+            List<Chat> activeChatSessions;
+            if(_memoryCache.TryGetValue(activeChatSessionsKey, out activeChatSessions))
+            {
+                activeChatSessions = activeChatSessions.FindAll((chat) =>
+                    chat.recipientUser.username == username
+                    || chat.senderUser.username == username
+                );
+
+            }
+            else
+            {
+                activeChatSessions = new List<Chat>();
+            }
+            string message = $"data: {JsonSerializer.Serialize(activeChatSessions)}\n\n";
+
+            byte[] messageBytes = ASCIIEncoding.ASCII.GetBytes(message);
+            await Response.Body.WriteAsync(messageBytes, 0, messageBytes.Length);
+            await Response.Body.FlushAsync();
+
+
+        }
         
     }
 }

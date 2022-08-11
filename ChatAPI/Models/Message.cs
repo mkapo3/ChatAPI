@@ -2,16 +2,16 @@
 {
     public class Message
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        public string Body { get; set; } = string.Empty;
+        public string body { get; set; } = string.Empty;
 
-        public string? Username { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public string? username { get; set; }
+        public DateTime? createdDate { get; set; }
 
-        public int? ChatId { get; set; }
+        public int? chatId { get; set; }
 
-        public bool? IsDeleted { get; set; }
+        public bool? isDeleted { get; set; }
 
 
     }

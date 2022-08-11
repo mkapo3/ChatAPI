@@ -2,6 +2,6 @@
 {
     public class User
     {
-        public string Username { get; set; } = string.Empty;
+        public string username { get; set; } = string.Empty;
     }
 }

@@ -24,47 +24,64 @@ namespace ChatAPI.Migrations
 
             modelBuilder.Entity("ChatAPI.Models.Message", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
-                    b.Property<string>("Body")
+                    b.Property<string>("body")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ChatId")
+                    b.Property<int?>("chatId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreatedDate")
+                    b.Property<DateTime?>("createdDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDeleted")
+                    b.Property<bool?>("isDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("Messages");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Body = "Prva poruka"
+                            id = 1,
+                            body = "Prva poruka",
+                            chatId = 1,
+                            isDeleted = false,
+                            username = "PrviKorisnik"
                         },
                         new
                         {
-                            Id = 2,
-                            Body = "Druga poruka"
+                            id = 2,
+                            body = "Druga poruka",
+                            chatId = 1,
+                            isDeleted = false,
+                            username = "DrugiKorisnik"
                         },
                         new
                         {
-                            Id = 3,
-                            Body = "Treca poruka"
+                            id = 3,
+                            body = "Treca poruka",
+                            chatId = 1,
+                            isDeleted = false,
+                            username = "TreciKorisnik"
+                        },
+                        new
+                        {
+                            id = 4,
+                            body = "Cetvrta poruka",
+                            chatId = 1,
+                            isDeleted = false,
+                            username = "Muharem"
                         });
                 });
 #pragma warning restore 612, 618

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ChatAPI.Database;
 using System.Text.Json;
 using System.Text;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ChatAPI.Controllers
 {
@@ -12,16 +13,36 @@ namespace ChatAPI.Controllers
     public class MessageController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IMemoryCache _memoryCache;
 
-        public MessageController(AppDbContext context)
+        public MessageController(IMemoryCache memorycache, AppDbContext context)
         {
             _context = context;
+            _memoryCache = memorycache;
         }
-        
-        [HttpGet("messages")]
-        public async Task GetMessages()
+
+        [HttpGet("messages/{chatId}")]
+        public async Task GetMessages(int chatId)
         {
-            List<Message> chatMessages = await _context.Messages.ToListAsync();
+            List<Message> chatMessages = new List<Message>();
+            if (chatId == 0) { 
+                chatMessages = await _context.Messages.ToListAsync();
+            }
+            else
+            {
+                string activeChatSessionsKey = "activechats";
+                List<Chat> activeChatSessions;
+                if (_memoryCache.TryGetValue(activeChatSessionsKey, out activeChatSessions))
+                {
+                    Chat currentChat = activeChatSessions.Find((newChat) => newChat.chatId == chatId);
+                    
+                    if (currentChat != null)
+                    {
+                        chatMessages = currentChat.messages;
+                    }
+                }
+
+            }
 
             Response.Headers.Add("Content-Type", "text/event-stream");
 
@@ -35,15 +56,33 @@ namespace ChatAPI.Controllers
        
         }
 
+      
+
         [HttpPost("sendmessage")]
         public async Task<ActionResult<string>> SendMessage(Message message)
         {
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
-            return message.Body;
+            return message.body;
+        }
+        [HttpPost("sendprivatemessage/{chatId}")]
+        public void SendMessage(Message message, int chatId)
+        {
+
+            string activeChatSessionsKey = "activechats";
+            List<Chat> activeChatSessions;
+            if (_memoryCache.TryGetValue(activeChatSessionsKey, out activeChatSessions))
+            {
+                activeChatSessions.Find((newChat) => newChat.chatId == chatId)
+                    .messages.Add(message);
+                _memoryCache.Set(activeChatSessionsKey, activeChatSessions);
+            }
+           
+        
+           
         }
 
-        [HttpGet("messages/{page}")]
+        /*[HttpGet("messages/{page}")]
         public async Task<ActionResult<MessageResponse>> GetMessagesPagination(int page)
         {
             
@@ -58,7 +97,7 @@ namespace ChatAPI.Controllers
             
             return messageResponse;
 
-        }
+        }*/
     }
 }
 
