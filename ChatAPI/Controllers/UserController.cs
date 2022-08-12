@@ -40,8 +40,7 @@ namespace ChatAPI.Controllers
             {
                 user.username = previousUser.username;
             }
-            //user.Username = "Muharem";
-            //HttpContext.Session.SetString("username", user.Username);
+            
 
             string activeUsersKey = "activeusers";
             List<User> activeUsers;
@@ -58,21 +57,6 @@ namespace ChatAPI.Controllers
                 _memoryCache.Set(activeUsersKey, activeUsers);
             }
 
-            //Response.Headers.Add("Content-Type", "text/event-stream");
-
-            //string message = $"data: {JsonSerializer.Serialize(activeUsers)}\n\n";
-
-
-            /*for (int i = 0; i < data.Length; i++)
-            {
-                await Task.Delay(TimeSpan.FromMilliseconds(200));
-                //string message = $"data:{i + 1}.{data[i]}\n\n";
-                byte[] messageBytes = ASCIIEncoding.ASCII.GetBytes(message);
-                await Response.Body.WriteAsync(messageBytes, 0, messageBytes.Length);
-                await Response.Body.FlushAsync();
-
-            }*/
-            //await Task.Delay(TimeSpan.FromMilliseconds(1000));
 
             return user;
             
@@ -87,7 +71,6 @@ namespace ChatAPI.Controllers
             {
                 User newUser = new User();
                 newUser.username = "Nema nista u cache";
-                //return new List<User> { newUser };
 
             }
 
@@ -100,7 +83,6 @@ namespace ChatAPI.Controllers
             await Response.Body.WriteAsync(messageBytes, 0, messageBytes.Length);
             await Response.Body.FlushAsync();
 
-            //return activeUsers;
 
         }
 
@@ -116,7 +98,6 @@ namespace ChatAPI.Controllers
             }
             catch (Exception e)
             {
-                // recover from exception
             }
 
         }
