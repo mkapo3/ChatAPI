@@ -1,0 +1,16 @@
+services:
+  chatapi:
+    build:
+      context: D:\Users\muhar\Source\Repos\ChatApplication
+      dockerfile: ChatAPI/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: chatapi
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\muhar\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\muhar\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'

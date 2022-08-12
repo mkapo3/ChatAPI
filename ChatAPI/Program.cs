@@ -39,6 +39,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+
+
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
@@ -50,6 +52,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dataContext.Database.Migrate();
+}
+
 app.UseHttpsRedirection();
 
 app.UseCors();
@@ -59,6 +67,5 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapControllers();
-
 
 app.Run();

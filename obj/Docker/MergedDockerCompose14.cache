@@ -1,0 +1,35 @@
+services:
+  chatDB:
+    image: mcr.microsoft.com/mssql/server
+    ports:
+    - published: 1401
+      target: 1433
+  chatapi:
+    build:
+      context: D:\Users\muhar\Source\Repos\ChatApplication
+      dockerfile: ChatAPI/Dockerfile
+    depends_on:
+      chatDB:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: chatapi
+    ports:
+    - published: 5087
+      target: 80
+    - target: 80
+    - published: 7087
+      target: 443
+    - target: 443
+    volumes:
+    - C:\Users\muhar\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\muhar\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+  frontend:
+    image: chatapi_front
+    links:
+    - chatapi
+    ports:
+    - published: 3000
+      target: 3000
+version: '3.4'

@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  
+  chatDB:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    ports:
+        - "1401:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+    
+
+  chatapi:
+    image: ${DOCKER_REGISTRY-}chatapi
+    ports:
+       - "7087:443"
+       - "5087:80"
+    build:
+      context: .
+      dockerfile: ChatAPI/Dockerfile
+    depends_on:
+        - chatDB
+   
+  frontend:
+    image: chatapi_front
+    ports:
+      - "3000:3000"
+    links:
+      - chatapi 
+    

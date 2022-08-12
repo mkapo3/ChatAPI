@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GP0AKVKAOvrD3ZtSvfTf0+p/vTaD66svBq90k+/8wYk5amhvRG/moMkvxiK1z418Pin3aYhAK1opsfWdthdnJg==",
+  "dgSpecHash": "2ijeBQw4oeaLCEwLkAOJEm4519mKdCCiE0geQLaoBulZtg1qaOsbP6f9Bf10vgHPX9nvuQhaRBHUNipmx16A8Q==",
   "success": true,
   "projectFilePath": "D:\\Users\\muhar\\Source\\Repos\\ChatApplication\\ChatAPI\\ChatAPI.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "C:\\Users\\muhar\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.8.0\\microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
     "C:\\Users\\muhar\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\muhar\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\muhar\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.15.1\\microsoft.visualstudio.azure.containers.tools.targets.1.15.1.nupkg.sha512",
     "C:\\Users\\muhar\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\muhar\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\muhar\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
